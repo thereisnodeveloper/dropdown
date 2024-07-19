@@ -1,9 +1,7 @@
 /* eslint-disable spaced-comment */
 import "./style.css";
 
-//function that creates a new dropdown menu
-//takes in a selector string
-
+//adds style for "hidden" class in CSS
 function addHiddenStyle() {
   const style = `.dropdown-item .hidden{
   display: none;
@@ -14,39 +12,43 @@ function addHiddenStyle() {
 }
 
 /**
- *
  * @param {Node} dropDownGroup
+ * takes in  a dropdown group, makes each child a dropdown-item
  */
-function makeDropdown(dropDownGroup) {
+function applyDropdownStyling(dropDownGroup) {
   dropDownGroup.childNodes.forEach((node) => {
     //process button
-
     //add "dropdown-item" class to each element
     node.classList.add("dropdown-item");
   });
+}
+// add style node
 
-  // add style node
-
+function makeDropDownButton() {
   //create dropdown button
   const dropDownButton = document.createElement("button");
   dropDownButton.textContent = "Dropdown";
   dropDownButton.classList.add("dropdown-button");
-
-  //create event listener
-  function toggleHidden(node) {
-    node.classList.toggle("hidden");
-    return node;
-  }
-
-  //attach event listener to button
-  function attachEventListener(button) {
-    button.addEventListener("click", toggleHidden);
-    return button;
-  }
-  attachEventListener(dropDownButton);
-
-  return dropDownButton;
+  return dropDownButton
 }
+
+const dropDownButtonTest = makeDropDownButton();
+
+//create event listener
+function toggleHidden(node) {
+  node.classList.toggle("hidden");
+  return node;
+}
+
+//attach event listener to button
+function attachEventListener(button) {
+  button.addEventListener("click", toggleHidden);
+  return button;
+}
+
+attachEventListener(dropDownButtonTest);
+
+document.body.appendChild(dropDownButtonTest);
 
 /**
  *
@@ -57,7 +59,7 @@ function identifyAllDropdowns(selector) {
   //get the elements with the selector
   const nodeList = document.body.querySelectorAll(selector);
   nodeList.forEach((dropDownGroup) => {
-    makeDropdown(dropDownGroup);
+    applyDropdownStyling(dropDownGroup);
   });
 }
 
