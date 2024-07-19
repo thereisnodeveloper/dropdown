@@ -7,10 +7,28 @@ module.exports = {
   devtool: "inline-source-map",
   devServer: { static: "./dist" },
   output: { filename: "main.js", path: path.resolve(__dirname, "dist") },
-//   optimization: { runtimeChunk: "single" },
+  //   optimization: { runtimeChunk: "single" },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/template.tml",
+      template: "./src/index.html",
     }),
   ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+      // {
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: "babel-loader",
+      //     options: {
+      //       presets: ["@babel/preset-env"],
+      //     },
+      //   },
+      // },
+    ],
+  },
 };
